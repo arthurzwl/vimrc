@@ -13,8 +13,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'Lokaltog/vim-easymotion'
 let g:EasyMotion_leader_key = 'f'
 
-Plugin 'scrooloose/nerdtree'
-
 Plugin 'bling/vim-airline'
 
 Plugin 'scrooloose/syntastic'
@@ -26,9 +24,43 @@ let g:syntastic_php_checkers = ['php', 'phpmd']
 
 Plugin 'arthurzwl/taglist'
 let Tlist_Show_One_File=1 "only show current file
+"let Tlist_File_Fold_Auto_Close=1
 let Tlist_Exit_OnlyWindow=1 "if taglist is the last windwow, exit vim
 let Tlist_WinWidth=30
-let Tlist_Auto_Open=1
+"let Tlist_Auto_Open=1
+let Tlist_Process_File_Always=1
+
+Plugin 'scrooloose/nerdtree'
+let g:NERDTree_title="[NERDTree]"
+let NERDTreeHighlightCursorline=1
+let NERDChristmasTree=1
+
+Plugin 'vim-scripts/winmanager'
+let g:winManagerWindowLayout="NERDTree|TagList"
+let g:winManagerWidth=30
+
+function! NERDTree_Start()
+    exec 'NERDTree'
+endfunction
+
+function! NERDTree_IsValid()
+    return 1
+endfunction
+
+nmap <silent> wm :if IsWinManagerVisible() <BAR> WMToggle<CR> <BAR> else <BAR> WMToggle<CR>:q<CR> endif <CR>
+
+Plugin 'fholgado/minibufexpl.vim'
+let g:miniBufExplMapWindowNavVim = 1 
+let g:miniBufExplMapWindowNavArrows = 1 
+let g:miniBufExplMapCTabSwitchBufs = 1 
+let g:miniBufExplModSelTarget = 1
+let g:miniBufExplMoreThanOne=0
+"Plugin 'tabbar'
+
+Plugin 'freya'
+
+Plugin 'Valloric/YouCompleteMe'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -55,6 +87,8 @@ set encoding=utf-8
 set fileencodings=utf-8,chinese
 set fileencoding=utf-8
 "colorscheme evening
+"colorscheme desert
+colo freya
 set ambiwidth=double
 set autochdir
 set autoindent cindent cinoptions=g0
@@ -70,4 +104,3 @@ set cmdheight=1
 set laststatus=2
 "set statusline=%F%m%r\ \|\ %Y,%{&fileencoding}\ \|%=\ %l/%L,%c\ \|\ %f
 "au FileType php setlocal dict+="~/.vim/after/phpdict/php_funclist.txt"
-colorscheme desert
