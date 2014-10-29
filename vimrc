@@ -96,6 +96,11 @@ let python_highlight_all = 1
 
 "color theme
 Plugin 'altercation/vim-colors-solarized'
+"set background=dark
+"colorscheme solarized
+"let g:solarized_termcolors=256
+Plugin 'darkburn'
+set t_Co=256
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -124,9 +129,6 @@ set encoding=utf-8
 set fileencodings=utf-8,chinese
 set fileencoding=utf-8
 syntax enable
-set background=dark
-colorscheme solarized
-"let g:solarized_termcolors=256
 
 set ambiwidth=double
 set autochdir
@@ -145,4 +147,5 @@ set cc=80
 
 noremap <silent> <Left> :bp<CR>
 noremap <silent> <Right> :bn<CR>
+colo darkburn
 "inoremap <C-z> <esc>gUiwea
