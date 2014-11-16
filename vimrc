@@ -48,6 +48,21 @@ Plugin 'vim-scripts/winmanager'
 let g:winManagerWindowLayout="NERDTree|TagList"
 let g:winManagerWidth=30
 
+Plugin 'nathanaelkane/vim-indent-guides'
+let g:indent_guides_guide_size=1
+hi IndentGuidesOdd  ctermbg=black
+hi IndentGuidesEven ctermbg=darkgrey
+map ,ch :call SetColorColumn()<CR>
+function! SetColorColumn()
+    let col_num = virtcol(".")
+    let cc_list = split(&cc, ',')
+    if count(cc_list, string(col_num)) <= 0
+        execute "set cc+=".col_num
+    else
+        execute "set cc-=".col_num
+    endif
+endfunction
+
 function! NERDTree_Start()
     exec 'NERDTree'
 endfunction
@@ -96,11 +111,16 @@ let python_highlight_all = 1
 
 "color theme
 Plugin 'altercation/vim-colors-solarized'
-"set background=dark
-"colorscheme solarized
-"let g:solarized_termcolors=256
 Plugin 'darkburn'
 set t_Co=256
+
+Plugin 'The-NERD-Commenter'
+Plugin 'dantezhu/authorinfo'
+let g:vimrc_author='Arthur Zhang' 
+let g:vimrc_email='zhangwenli@xiaomi.com' 
+let g:vimrc_homepage='' 
+
+nmap <F4> :AuthorInfoDetect<cr>
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -117,10 +137,14 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+colo darkburn
 if has("gui_running")
     " 设定 linux
     "set guifont=Source\ Code\ Pro\ Regular:h14:cANSI
     set guifont=Source\ Code\ Pro\ Medium\ 14
+    set background=dark
+    colorscheme solarized
+    let g:solarized_termcolors=256
 endif
 
 set t_Co=256
@@ -147,5 +171,7 @@ set cc=80
 
 noremap <silent> <Left> :bp<CR>
 noremap <silent> <Right> :bn<CR>
-colo darkburn
+nmap <F3> :!ctags -R<cr>
+let mapleader=","
+let g:mapleader=","
 "inoremap <C-z> <esc>gUiwea
