@@ -154,6 +154,9 @@ set fileencodings=utf-8,chinese
 set fileencoding=utf-8
 syntax enable
 
+set cul
+set cuc
+
 set ambiwidth=double
 set autochdir
 set autoindent cindent cinoptions=g0
