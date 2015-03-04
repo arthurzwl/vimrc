@@ -13,7 +13,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'Lokaltog/vim-easymotion'
 let g:EasyMotion_leader_key = 'f'
 
-Plugin 'bling/vim-airline'
+" Plugin 'bling/vim-airline'
 
 " let g:syntastic_check_on_open=1
 " let g:syntastic_always_populate_loc_list = 1
@@ -28,7 +28,7 @@ let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height = 6
 let g:syntastic_enable_highlighting = 0
-let g:syntastic_php_checkers = ['php', 'phpmd']
+let g:syntastic_php_checkers = ['php']
 let g:syntastic_python_checkers = ['pyflakes']
 " let g:syntastic_python_checkers = ['pylint']
 map cc :SyntasticCheck<CR>
@@ -111,16 +111,18 @@ let python_highlight_all = 1
 
 "color theme
 Plugin 'altercation/vim-colors-solarized'
+" let g:solarized_termcolors=256
 Plugin 'darkburn'
-set t_Co=256
 
 Plugin 'The-NERD-Commenter'
 Plugin 'dantezhu/authorinfo'
-let g:vimrc_author='Arthur Zhang' 
-let g:vimrc_email='zhangwenli@xiaomi.com' 
-let g:vimrc_homepage='' 
+let g:vimrc_author='Arthur Zhang'
+let g:vimrc_email='zhangwenli@xiaomi.com'
+let g:vimrc_homepage=''
 
 nmap <F4> :AuthorInfoDetect<cr>
+
+Plugin '2072/PHP-Indenting-for-VIm'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -137,7 +139,10 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+set t_Co=256
 colo darkburn
+" set background=dark
+" colo solarized
 if has("gui_running")
     " 设定 linux
     "set guifont=Source\ Code\ Pro\ Regular:h14:cANSI
@@ -147,7 +152,6 @@ if has("gui_running")
     let g:solarized_termcolors=256
 endif
 
-set t_Co=256
 set nu!
 set encoding=utf-8
 set fileencodings=utf-8,chinese
@@ -162,18 +166,52 @@ set autochdir
 set autoindent cindent cinoptions=g0
 set backspace=indent,eol,start
 set fileformat=unix
-set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
 set formatoptions=tcqro
 syntax on
 set cmdheight=1
 set laststatus=2
 set cc=80
 
+set sw=4
+set ts=4
+set sts=4
+set et
+
+filetype indent on
+autocmd FileType python setlocal et sta sw=4 sts=4
+autocmd FileType html setlocal et sta sw=2 sts=2 ts=2
+autocmd FileType smarty setlocal et sta sw=2 sts=2 ts=2
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 设置命令行和状态栏
+
+set cmdheight=1            " 设定命令行的行数为 1
+set laststatus=2            " 显示状态栏 (默认值为 1, 无法显示状态栏)
+set statusline=%F%m%r\ \|\ %Y,%{&fileencoding}\ \|%=\ %l/%L,%c\ \|\ %f
+                            " 设置在状态行显示的信息如下：
+                            " %f    当前的文件名
+                            " %F    当前全路径文件名
+                            " %m    当前文件修改状态
+                            " %r    当前文件是否只读
+                            " %Y    当前文件类型
+                            " %{&fileformat}
+                            "       当前文件编码
+                            " %{&fileencoding}
+                            "       中文编码
+                            " %b    当前光标处字符的 ASCII 码值
+                            " %B    当前光标处字符的十六进制值
+                            " %l    当前光标行号
+                            " %c    当前光标列号
+                            " %V    当前光标虚拟列号 (根据字符所占字节数计算)
+                            " %p    当前行占总行数的百分比
+                            " %%    百分号
+                            " %L    当前文件总行数
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 noremap <silent> <Left> :bp<CR>
 noremap <silent> <Right> :bn<CR>
+nmap <F2> :%s/ *$//<cr>:%retab!<cr>
 nmap <F3> :!ctags -R<cr>
 let mapleader=","
 let g:mapleader=","
