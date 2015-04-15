@@ -216,3 +216,4 @@ nmap <F3> :!ctags -R<cr>
 let mapleader=","
 let g:mapleader=","
 "inoremap <C-z> <esc>gUiwea
+set clipboard=unnamedplus
