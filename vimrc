@@ -13,7 +13,10 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'Lokaltog/vim-easymotion'
 let g:EasyMotion_leader_key = 'f'
 
-" Plugin 'bling/vim-airline'
+Plugin 'bling/vim-airline'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " let g:syntastic_check_on_open=1
 " let g:syntastic_always_populate_loc_list = 1
@@ -92,6 +95,7 @@ Plugin 'SirVer/ultisnips'
 
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
+Plugin 'vim-scripts/SQLComplete.vim'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger='<C-v>'
@@ -140,9 +144,10 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 set t_Co=256
-colo darkburn
-" set background=dark
-" colo solarized
+" colo darkburn
+set background=dark
+colorscheme solarized
+" let g:solarized_termcolors=256
 if has("gui_running")
     " 设定 linux
     "set guifont=Source\ Code\ Pro\ Regular:h14:cANSI
@@ -185,9 +190,9 @@ autocmd FileType smarty setlocal et sta sw=2 sts=2 ts=2
 
 " 设置命令行和状态栏
 
-set cmdheight=1            " 设定命令行的行数为 1
-set laststatus=2            " 显示状态栏 (默认值为 1, 无法显示状态栏)
-set statusline=%F%m%r\ \|\ %Y,%{&fileencoding}\ \|%=\ %l/%L,%c\ \|\ %f
+" set cmdheight=1            " 设定命令行的行数为 1
+" set laststatus=2            " 显示状态栏 (默认值为 1, 无法显示状态栏)
+" set statusline=%F%m%r\ \|\ %Y,%{&fileencoding}\ \|%=\ %l/%L,%c\ \|\ %f
                             " 设置在状态行显示的信息如下：
                             " %f    当前的文件名
                             " %F    当前全路径文件名
