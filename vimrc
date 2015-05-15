@@ -11,12 +11,23 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'Lokaltog/vim-easymotion'
-let g:EasyMotion_leader_key = 'f'
+" let g:EasyMotion_leader_key = 'f'
 
 Plugin 'bling/vim-airline'
+let g:airline#extensions#hunks#enabled=0
+let g:airline#extensions#branch#enabled=1
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#show_close_button = 1
+let g:airline#extensions#tabline#close_symbol = 'X'
 
 " let g:syntastic_check_on_open=1
 " let g:syntastic_always_populate_loc_list = 1
@@ -183,7 +194,7 @@ set sts=4
 set et
 
 filetype indent on
-autocmd FileType python setlocal et sta sw=4 sts=4
+autocmd FileType python setlocal et sta sw=4 sts=4 ts=4
 autocmd FileType html setlocal et sta sw=2 sts=2 ts=2
 autocmd FileType smarty setlocal et sta sw=2 sts=2 ts=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -193,24 +204,24 @@ autocmd FileType smarty setlocal et sta sw=2 sts=2 ts=2
 " set cmdheight=1            " 设定命令行的行数为 1
 " set laststatus=2            " 显示状态栏 (默认值为 1, 无法显示状态栏)
 " set statusline=%F%m%r\ \|\ %Y,%{&fileencoding}\ \|%=\ %l/%L,%c\ \|\ %f
-                            " 设置在状态行显示的信息如下：
-                            " %f    当前的文件名
-                            " %F    当前全路径文件名
-                            " %m    当前文件修改状态
-                            " %r    当前文件是否只读
-                            " %Y    当前文件类型
-                            " %{&fileformat}
-                            "       当前文件编码
-                            " %{&fileencoding}
-                            "       中文编码
-                            " %b    当前光标处字符的 ASCII 码值
-                            " %B    当前光标处字符的十六进制值
-                            " %l    当前光标行号
-                            " %c    当前光标列号
-                            " %V    当前光标虚拟列号 (根据字符所占字节数计算)
-                            " %p    当前行占总行数的百分比
-                            " %%    百分号
-                            " %L    当前文件总行数
+" 设置在状态行显示的信息如下：
+" %f    当前的文件名
+" %F    当前全路径文件名
+" %m    当前文件修改状态
+" %r    当前文件是否只读
+" %Y    当前文件类型
+" %{&fileformat}
+"       当前文件编码
+" %{&fileencoding}
+"       中文编码
+" %b    当前光标处字符的 ASCII 码值
+" %B    当前光标处字符的十六进制值
+" %l    当前光标行号
+" %c    当前光标列号
+" %V    当前光标虚拟列号 (根据字符所占字节数计算)
+" %p    当前行占总行数的百分比
+" %%    百分号
+" %L    当前文件总行数
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -222,3 +233,9 @@ let mapleader=","
 let g:mapleader=","
 "inoremap <C-z> <esc>gUiwea
 set clipboard=unnamedplus
+
+" Yank text to the OS X clipboard" 将文本复制到OS X剪贴板中
+noremap <leader>y "+y
+noremap <leader>yy "+Y
+" Preserve indentation while pasting text from the OS X clipboard 在粘贴OS X剪贴板中的文本时保留缩进
+noremap <leader>p :set paste<CR>:put +<CR>:set nopaste<CR>
