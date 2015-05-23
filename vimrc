@@ -11,27 +11,35 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'Lokaltog/vim-easymotion'
-" let g:EasyMotion_leader_key = 'f'
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
 
-Plugin 'bling/vim-airline'
-let g:airline#extensions#hunks#enabled=0
-let g:airline#extensions#branch#enabled=1
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
 
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+set laststatus=2 " Always display the statusline in all windows
+set showtabline=2 " Always display the tabline, even if there is only one tab
+set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#show_close_button = 1
-let g:airline#extensions#tabline#close_symbol = 'X'
+" Plugin 'bling/vim-airline'
+" let g:airline#extensions#hunks#enabled=0
+" let g:airline#extensions#branch#enabled=1
 
-" let g:syntastic_check_on_open=1
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
+" if !exists('g:airline_symbols')
+"   let g:airline_symbols = {}
+" endif
+" let g:airline_symbols.space = "\ua0"
+
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline#extensions#tabline#show_close_button = 1
+" let g:airline#extensions#tabline#close_symbol = 'X'
+
 
 " syntastic
 Plugin 'scrooloose/syntastic'
@@ -45,7 +53,10 @@ let g:syntastic_enable_highlighting = 0
 let g:syntastic_php_checkers = ['php']
 let g:syntastic_python_checkers = ['pyflakes']
 " let g:syntastic_python_checkers = ['pylint']
-map cc :SyntasticCheck<CR>
+" let g:syntastic_check_on_open=1
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
+" map cc :SyntasticCheck<CR>
 
 Plugin 'arthurzwl/taglist'
 let Tlist_Show_One_File=1 "only show current file
@@ -57,6 +68,8 @@ Plugin 'scrooloose/nerdtree'
 let g:NERDTree_title="[NERDTree]"
 let NERDTreeHighlightCursorline=1
 let NERDChristmasTree=1
+
+" Plugin 'fholgado/minibufexpl.vim'
 
 Plugin 'vim-scripts/winmanager'
 let g:winManagerWindowLayout="NERDTree|TagList"
@@ -223,6 +236,8 @@ autocmd FileType smarty setlocal et sta sw=2 sts=2 ts=2
 " %%    百分号
 " %L    当前文件总行数
 
+" set rtp+=/home/arthur/github/powerline/powerline/bindings/vim
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 noremap <silent> <Left> :bp<CR>
@@ -232,7 +247,7 @@ nmap <F3> :!ctags -R<cr>
 let mapleader=","
 let g:mapleader=","
 "inoremap <C-z> <esc>gUiwea
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
 
 " Yank text to the OS X clipboard" 将文本复制到OS X剪贴板中
 noremap <leader>y "+y
