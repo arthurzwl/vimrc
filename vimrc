@@ -24,6 +24,8 @@ map  N <Plug>(easymotion-prev)
 " set showtabline=2 " Always display the tabline, even if there is only one tab
 " set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
+Plugin 'tpope/vim-fugitive'
+
 Plugin 'bling/vim-airline'
 let g:airline#extensions#hunks#enabled=0
 let g:airline#extensions#branch#enabled=1
@@ -34,6 +36,7 @@ if !exists('g:airline_symbols')
 endif
 let g:airline_symbols.space = "\ua0"
 let g:airline_theme='wombat'
+" let g:airline_theme='molokai'
 " enable powerline-fonts
 let g:airline_powerline_fonts = 1
 " enable tabline
