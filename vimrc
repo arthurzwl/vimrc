@@ -19,11 +19,6 @@ nmap t <Plug>(easymotion-t2)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
 
-" Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-" set laststatus=2 " Always display the statusline in all windows
-" set showtabline=2 " Always display the tabline, even if there is only one tab
-" set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
-
 Plugin 'tpope/vim-fugitive'
 
 Plugin 'bling/vim-airline'
@@ -49,7 +44,6 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#show_close_button = 1
 let g:airline#extensions#tabline#close_symbol = 'X'
-
 
 " syntastic
 Plugin 'scrooloose/syntastic'
@@ -85,7 +79,16 @@ Plugin 'vim-scripts/winmanager'
 let g:winManagerWindowLayout="NERDTree|TagList"
 let g:winManagerWidth=30
 
+" Indent Guides
 Plugin 'nathanaelkane/vim-indent-guides'
+" 随 vim 自启动
+let g:indent_guides_enable_on_vim_startup=1
+" 从第二层开始可视化显示缩进
+let g:indent_guides_start_level=2
+" 色块宽度
+let g:indent_guides_guide_size=1
+" 快捷键 i 开/关缩进可视化
+nmap <silent> <Leader>i <Plug>IndentGuidesToggle
 let g:indent_guides_guide_size=1
 hi IndentGuidesOdd  ctermbg=black
 hi IndentGuidesEven ctermbg=darkgrey
@@ -192,7 +195,7 @@ Plugin 'The-NERD-Commenter'
 Plugin 'dantezhu/authorinfo'
 let g:vimrc_author='Arthur Zhang'
 let g:vimrc_email='zhangwenli@xiaomi.com'
-" let g:vimrc_homepage=''
+let g:vimrc_homepage=''
 
 nmap <F4> :AuthorInfoDetect<cr>
 
@@ -319,3 +322,10 @@ noremap <leader>y "+y
 noremap <leader>yy "+Y
 " Preserve indentation while pasting text from the OS X clipboard 在粘贴OS X剪贴板中的文本时保留缩进
 noremap <leader>p :set paste<CR>:put +<CR>:set nopaste<CR>
+
+" 基于缩进或语法进行代码折叠
+" za，打开或关闭当前折叠；zM，关闭所有折叠；zR，打开所有折叠。
+set foldmethod=indent
+" set foldmethod=syntax
+" " 启动 vim 时关闭折叠代码
+set nofoldenable
