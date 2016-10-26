@@ -56,6 +56,7 @@ let g:syntastic_loc_list_height = 6
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_php_checkers = ['php']
 let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_javascript_checkers = ['eslint']
 " let g:syntastic_python_checkers = ['pylint']
 " let g:syntastic_check_on_open=1
 " let g:syntastic_always_populate_loc_list = 1
@@ -280,6 +281,8 @@ filetype indent on
 autocmd FileType python setlocal et sta sw=4 sts=4 ts=4
 autocmd FileType html setlocal et sta sw=2 sts=2 ts=2
 autocmd FileType smarty setlocal et sta sw=2 sts=2 ts=2
+autocmd FileType javascript setlocal et sta sw=2 sts=2 ts=2
+autocmd FileType css setlocal et sta sw=2 sts=2 ts=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 设置命令行和状态栏
