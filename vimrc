@@ -315,7 +315,7 @@ autocmd FileType css setlocal et sta sw=2 sts=2 ts=2
 
 noremap <silent> <c-h> :bp<CR>
 noremap <silent> <c-l> :bn<CR>
-nmap <F2> :%s/ *$//<cr>:%retab!<cr>
+nmap <F2> :%s/\s*$//<cr>:%retab!<cr>
 nmap <F3> :!ctags -R<cr>
 let mapleader=","
 let g:mapleader=","
