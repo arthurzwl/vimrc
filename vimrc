@@ -20,28 +20,33 @@ map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
 
 Plugin 'tpope/vim-fugitive'
-
+Plugin 'mhinz/vim-signify'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'jreybert/vimagit'
+Plugin 'majutsushi/tagbar'
 Plugin 'bling/vim-airline'
-let g:airline#extensions#hunks#enabled=0
-let g:airline#extensions#branch#enabled=1
+Plugin 'vim-airline/vim-airline-themes'
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#vimagit#enabled = 1
+let g:airline#extensions#hunks#enabled = 1
+let g:airline#extensions#vimagit#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 " set status line
 set laststatus=2
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
-" let g:airline_theme='wombat'
-" let g:airline_theme='molokai'
+let g:airline_theme='dark'
 " enable powerline-fonts
 let g:airline_powerline_fonts = 1
-" enable tabline
-let g:airline#extensions#tabline#enabled = 1
 " show buffer number
-let g:airline#extensions#tabline#buffer_nr_show = 1
 " set left separator
-let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_sep = ' '
 " set left separator which are not editting
-let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#show_close_button = 1
 let g:airline#extensions#tabline#close_symbol = 'X'
 
@@ -57,52 +62,87 @@ let g:syntastic_enable_highlighting = 0
 let g:syntastic_php_checkers = ['php']
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_python_checkers = ['pylint']
 " let g:syntastic_check_on_open=1
 " let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
 " map cc :SyntasticCheck<CR>
 
-Plugin 'arthurzwl/taglist'
-let Tlist_Show_One_File=1 "only show current file
-let Tlist_Exit_OnlyWindow=1 "if taglist is the last windwow, exit vim
-let Tlist_WinWidth=30
-let Tlist_Process_File_Always=1
+Plugin 'ryanoasis/vim-devicons'
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
 
 Plugin 'scrooloose/nerdtree'
+" autocmd vimenter * NERDTree
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" let g:NERDTreeDirArrowExpandable = '▸'
+" let g:NERDTreeDirArrowCollapsible = '▾'
+map <C-n> :NERDTreeToggle<CR>
 let g:NERDTree_title="[NERDTree]"
 let NERDTreeHighlightCursorline=1
 let NERDChristmasTree=1
 
+Plugin 'arthurzwl/nerdtree-tagbar-combined'
+nmap <F7> :ToggleNERDTreeAndTagbar<CR>
+nmap <silent> wm :ToggleNERDTreeAndTagbar<CR>
+
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
+let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
+" you can add these colors to your .vimrc to help customizing
+let s:brown = "905532"
+let s:aqua =  "3AFFDB"
+let s:blue = "689FB6"
+let s:darkBlue = "44788E"
+let s:purple = "834F79"
+let s:lightPurple = "834F79"
+let s:red = "AE403F"
+let s:beige = "F5C06F"
+let s:yellow = "F09F17"
+let s:orange = "D4843E"
+let s:darkOrange = "F16529"
+let s:pink = "CB6F6F"
+let s:salmon = "EE6E73"
+let s:green = "8FAA54"
+let s:lightGreen = "31B53E"
+let s:white = "FFFFFF"
+let s:rspec_red = 'FE405F'
+let s:git_orange = 'F54D27'
+
+let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreeExtensionHighlightColor['css'] = s:blue " sets the color of css files to blue
+
+let g:NERDTreeExactMatchHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreeExactMatchHighlightColor['.gitignore'] = s:git_orange " sets the color for .gitignore files
+
+let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets the color for files ending with _spec.rb
+let g:NERDTreeLimitedSyntax = 1
+
 " Plugin 'fholgado/minibufexpl.vim'
 
-Plugin 'vim-scripts/winmanager'
-let g:winManagerWindowLayout="NERDTree|TagList"
-let g:winManagerWidth=30
-
 " Indent Guides
-Plugin 'nathanaelkane/vim-indent-guides'
-" 随 vim 自启动
-let g:indent_guides_enable_on_vim_startup=1
-" 从第二层开始可视化显示缩进
-let g:indent_guides_start_level=2
-" 色块宽度
-let g:indent_guides_guide_size=1
-" 快捷键 i 开/关缩进可视化
-nmap <silent> <Leader>i <Plug>IndentGuidesToggle
-let g:indent_guides_guide_size=1
-hi IndentGuidesOdd  ctermbg=black
-hi IndentGuidesEven ctermbg=darkgrey
-map ,ch :call SetColorColumn()<CR>
-function! SetColorColumn()
-    let col_num = virtcol(".")
-    let cc_list = split(&cc, ',')
-    if count(cc_list, string(col_num)) <= 0
-        execute "set cc+=".col_num
-    else
-        execute "set cc-=".col_num
-    endif
-endfunction
+Plugin 'Yggdroot/indentLine'
+let g:indentLine_enabled = 1
+let g:indentLine_leadingSpaceEnabled = 1
+let g:indentLine_leadingSpaceChar = '.'
 
 function! NERDTree_Start()
     exec 'NERDTree'
@@ -111,10 +151,6 @@ endfunction
 function! NERDTree_IsValid()
     return 1
 endfunction
-
-nmap <silent> wm :if IsWinManagerVisible() <BAR> WMToggle<CR> <BAR> else <BAR> WMToggle<CR>:q<CR> endif <CR>
-
-" Plugin 'tpope/vim-fugitive'
 
 Plugin 'Valloric/YouCompleteMe'
 "youcompleteme  默认tab  s-tab 和自动补全冲突
@@ -155,10 +191,10 @@ let g:ycm_filetype_blacklist = {
       \}
 
 Plugin 'Yggdroot/LeaderF'
-let g:Lf_ShortcutF = '<C-F>'
-let g:Lf_WindowPosition = 0
-let g:Lf_CommandMap = {'<C-F>': ['<C-D>'], '<C-Q>': ['<Esc>']}
-let g:Lf_DefaultMode = 3
+" let g:Lf_ShortcutF = '<C-F>'
+" let g:Lf_WindowPosition = 0
+" let g:Lf_CommandMap = {'<C-F>': ['<C-D>'], '<C-Q>': ['<Esc>']}
+" let g:Lf_DefaultMode = 3
 
 Plugin 'tpope/vim-commentary'
 nmap <BS> gcc
@@ -166,6 +202,9 @@ vmap <BS> gc
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<c-v>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
@@ -221,7 +260,7 @@ let g:user_emmet_settings = {
 \ },
 \}
 
-Plugin 'airblade/vim-gitgutter'
+" Plugin 'airblade/vim-gitgutter'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -246,7 +285,8 @@ colorscheme solarized
 if has("gui_running")
     " 设定 linux
     "set guifont=Source\ Code\ Pro\ Regular:h14:cANSI
-    set guifont=Source\ Code\ Pro\ Medium\ 14
+    " set guifont=Source\ Code\ Pro\ Medium\ 14
+    set guifont=SauceCodePro\ Nerd\ Font\ Medium\ 14
     set background=dark
     colorscheme solarized
     let g:solarized_termcolors=256
@@ -313,8 +353,8 @@ autocmd FileType css setlocal et sta sw=2 sts=2 ts=2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-noremap <silent> <c-h> :bp<CR>
-noremap <silent> <c-l> :bn<CR>
+noremap <c-h> :bp<CR>
+noremap <c-l> :bn<CR>
 nmap <F2> :%s/\s*$//<cr>:%retab!<cr>
 nmap <F3> :!ctags -R<cr>
 let mapleader=","
