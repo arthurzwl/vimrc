@@ -1,10 +1,14 @@
+scriptencoding utf-8
+set encoding=utf-8
+set fileencoding=utf-8
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
+"alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
@@ -18,6 +22,30 @@ nmap t <Plug>(easymotion-t2)
 
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
+
+Plugin 'autowitch/hive.vim'
+" for .hql files
+au BufNewFile,BufRead *.hql set filetype=hive expandtab
+" for .q files
+au BufNewFile,BufRead *.q set filetype=hive expandtab
+
+Plugin 'vim-scripts/Align'
+Plugin 'vim-scripts/SQLUtilities'
+vmap <silent>sf        <Plug>SQLU_Formatter<CR>
+nmap <silent>scl       <Plug>SQLU_CreateColumnList<CR>
+nmap <silent>scd       <Plug>SQLU_GetColumnDef<CR>
+nmap <silent>scdt      <Plug>SQLU_GetColumnDataType<CR>
+nmap <silent>scp       <Plug>SQLU_CreateProcedure<CR>
+
+" autoformat code
+Plugin 'chiel92/vim-autoformat'
+noremap <F3> :Autoformat<CR>
+nmap <silent>aft :Autoformat<CR>
+"au BufWrite * :Autoformat
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 0
+let g:formatter_yapf_style = 'google'
 
 Plugin 'tpope/vim-fugitive'
 Plugin 'mhinz/vim-signify'
@@ -74,6 +102,7 @@ let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
 
 Plugin 'scrooloose/nerdtree'
+Plugin 'posva/vim-vue'
 " autocmd vimenter * NERDTree
 " autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -92,16 +121,16 @@ nmap <silent> wm :ToggleNERDTreeAndTagbar<CR>
 
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ "Unknown"   : "?"
-    \ }
+      \ "Modified"  : "✹",
+      \ "Staged"    : "✚",
+      \ "Untracked" : "✭",
+      \ "Renamed"   : "➜",
+      \ "Unmerged"  : "═",
+      \ "Deleted"   : "✖",
+      \ "Dirty"     : "✗",
+      \ "Clean"     : "✔︎",
+      \ "Unknown"   : "?"
+      \ }
 
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
@@ -139,18 +168,18 @@ let g:NERDTreeLimitedSyntax = 1
 " Plugin 'fholgado/minibufexpl.vim'
 
 " Indent Guides
-Plugin 'Yggdroot/indentLine'
-let g:indentLine_enabled = 1
-let g:indentLine_leadingSpaceEnabled = 1
-let g:indentLine_leadingSpaceChar = '.'
+" Plugin 'Yggdroot/indentLine'
+" let g:indentLine_enabled = 1
+" let g:indentLine_leadingSpaceEnabled = 1
+" let g:indentLine_leadingSpaceChar = '.'
 
-function! NERDTree_Start()
-    exec 'NERDTree'
-endfunction
+" function! NERDTree_Start()
+"    exec 'NERDTree'
+" endfunction
 
-function! NERDTree_IsValid()
-    return 1
-endfunction
+" function! NERDTree_IsValid()
+"    return 1
+" endfunction
 
 Plugin 'Valloric/YouCompleteMe'
 "youcompleteme  默认tab  s-tab 和自动补全冲突
@@ -175,11 +204,11 @@ nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
 " 引入，可以补全系统，以及python的第三方包 针对新老版本YCM做了兼容
 " old version
 if !empty(glob("~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"))
-    let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
+  let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
 endif
 " new version
 if !empty(glob("~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
-    let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+  let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
 endif
 
 " 直接触发自动补全 insert模式下
@@ -245,22 +274,25 @@ Plugin '2072/PHP-Indenting-for-VIm'
 Plugin 'mattn/emmet-vim'
 let g:user_emmet_expandabbr_key = '<Tab>'
 let g:user_emmet_settings = {
-\ 'php' : {
-\ 'extends' : 'html',
-\ 'filters' : 'c',
-\ },
-\ 'xml' : {
-\ 'extends' : 'html',
-\ },
-\ 'haml' : {
-\ 'extends' : 'html',
-\ },
-\ 'phtml' : {
-\ 'extends' : 'html',
-\ },
-\}
+      \ 'php' : {
+      \ 'extends' : 'html',
+      \ 'filters' : 'c',
+      \ },
+      \ 'xml' : {
+      \ 'extends' : 'html',
+      \ },
+      \ 'haml' : {
+      \ 'extends' : 'html',
+      \ },
+      \ 'phtml' : {
+      \ 'extends' : 'html',
+      \ },
+      \}
 
 " Plugin 'airblade/vim-gitgutter'
+
+" Solidity
+Plugin 'tomlion/vim-solidity'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -283,19 +315,16 @@ set background=dark
 colorscheme solarized
 " let g:solarized_termcolors=256
 if has("gui_running")
-    " 设定 linux
-    "set guifont=Source\ Code\ Pro\ Regular:h14:cANSI
-    " set guifont=Source\ Code\ Pro\ Medium\ 14
-    set guifont=SauceCodePro\ Nerd\ Font\ Medium\ 14
-    set background=dark
-    colorscheme solarized
-    let g:solarized_termcolors=256
+  " 设定 linux
+  "set guifont=Source\ Code\ Pro\ Regular:h14:cANSI
+  " set guifont=Source\ Code\ Pro\ Medium\ 14
+  set guifont=SauceCodePro\ Nerd\ Font\ Medium\ 14
+  set background=dark
+  colorscheme solarized
+  let g:solarized_termcolors=256
 endif
 
-set nu!
-set encoding=utf-8
-set fileencodings=utf-8,chinese
-set fileencoding=utf-8
+set nu
 syntax enable
 
 set cul
@@ -310,11 +339,11 @@ set formatoptions=tcqro
 syntax on
 set cmdheight=1
 set laststatus=2
-set cc=80
+set cc=120
 
-set sw=4
-set ts=4
-set sts=4
+set sw=2
+set ts=2
+set sts=2
 set et
 
 filetype indent on
@@ -323,36 +352,6 @@ autocmd FileType html setlocal et sta sw=2 sts=2 ts=2
 autocmd FileType smarty setlocal et sta sw=2 sts=2 ts=2
 autocmd FileType javascript setlocal et sta sw=2 sts=2 ts=2
 autocmd FileType css setlocal et sta sw=2 sts=2 ts=2
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" 设置命令行和状态栏
-
-" set cmdheight=1            " 设定命令行的行数为 1
-" set laststatus=2            " 显示状态栏 (默认值为 1, 无法显示状态栏)
-" set statusline=%F%m%r\ \|\ %Y,%{&fileencoding}\ \|%=\ %l/%L,%c\ \|\ %f
-" 设置在状态行显示的信息如下：
-" %f    当前的文件名
-" %F    当前全路径文件名
-" %m    当前文件修改状态
-" %r    当前文件是否只读
-" %Y    当前文件类型
-" %{&fileformat}
-"       当前文件编码
-" %{&fileencoding}
-"       中文编码
-" %b    当前光标处字符的 ASCII 码值
-" %B    当前光标处字符的十六进制值
-" %l    当前光标行号
-" %c    当前光标列号
-" %V    当前光标虚拟列号 (根据字符所占字节数计算)
-" %p    当前行占总行数的百分比
-" %%    百分号
-" %L    当前文件总行数
-
-" set rtp+=/home/arthur/github/powerline/powerline/bindings/vim
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 noremap <c-h> :bp<CR>
 noremap <c-l> :bn<CR>
 nmap <F2> :%s/\s*$//<cr>:%retab!<cr>
@@ -374,3 +373,8 @@ set foldmethod=indent
 " set foldmethod=syntax
 " " 启动 vim 时关闭折叠代码
 set nofoldenable
+
+" 空格显示为.
+set list
+set lcs=tab:»-,trail:∙,eol:↲,extends:»,precedes:«,nbsp:%,space:∙
+
