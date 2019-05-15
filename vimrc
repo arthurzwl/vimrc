@@ -115,7 +115,7 @@ let g:NERDTree_title="[NERDTree]"
 let NERDTreeHighlightCursorline=1
 let NERDChristmasTree=1
 
-Plugin 'arthurzwl/nerdtree-tagbar-combined'
+Plugin 'pseewald/nerdtree-tagbar-combined'
 nmap <F7> :ToggleNERDTreeAndTagbar<CR>
 nmap <silent> wm :ToggleNERDTreeAndTagbar<CR>
 
@@ -369,12 +369,20 @@ noremap <leader>p :set paste<CR>:put +<CR>:set nopaste<CR>
 
 " 基于缩进或语法进行代码折叠
 " za，打开或关闭当前折叠；zM，关闭所有折叠；zR，打开所有折叠。
+" zc 折叠
+" zC 对所在范围内所有嵌套的折叠点进行折叠
+" zo 展开折叠
+" zO 对所在范围内所有嵌套的折叠点展开
+" [z 到当前打开的折叠的开始处。
+" ]z 到当前打开的折叠的末尾处。
+" zj 向下移动。到达下一个折叠的开始处。关闭的折叠也被计入。
+" zk 向上移动到前一折叠的结束处。关闭的折叠也被计入。
 set foldmethod=indent
 " set foldmethod=syntax
 " " 启动 vim 时关闭折叠代码
 set nofoldenable
 
 " 空格显示为.
-set list
+" set list
 set lcs=tab:»-,trail:∙,eol:↲,extends:»,precedes:«,nbsp:%,space:∙
 
